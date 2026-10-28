@@ -1,642 +1,783 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#fff1f6">
-<title>Princess Khola | Birthday Surprise</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff1f6">
+  <title>Princess Khola | Birthday Surprise</title>
 
-<style>
-:root {
-  --pink: #f6bfd2;
-  --rose: #a65e79;
-  --gold: #c69b65;
-  --ink: #624653;
-}
+  <style>
+    :root {
+      --pink: #fff0f6;
+      --rose: #ad607c;
+      --gold: #c99c68;
+      --ink: #624653;
+      --white: #fffdfd;
+      --border: #edc8d7;
+    }
 
-* {
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-body {
-  margin: 0;
-  color: var(--ink);
-  font-family: Georgia, serif;
-  background: linear-gradient(
-    135deg, #fff8fb, #ffedf4 55%, #f3edff
-  );
-}
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Georgia, serif;
+      background: linear-gradient(135deg, #fff8fb, #ffedf4, #f3edff);
+      min-height: 100vh;
+    }
 
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  background: #fffaf0dd;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid #ead0dc;
-  padding: 16px 5%;
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-}
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 18px 5%;
+      background: #fffaf0ed;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
 
-.brand {
-  color: var(--rose);
-  font-weight: bold;
-  letter-spacing: .08em;
-}
+    .brand {
+      color: var(--rose);
+      font-weight: bold;
+      letter-spacing: .08em;
+    }
 
-nav a {
-  margin-left: 15px;
-  color: var(--ink);
-  text-decoration: none;
-  font: 600 .85rem Arial;
-}
+    .step-label {
+      font: 600 .75rem Arial, sans-serif;
+      color: var(--rose);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
 
-.hero {
-  min-height: 68vh;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 65px 20px;
-}
+    .screen {
+      display: none;
+      min-height: calc(100vh - 70px);
+      padding: 65px 20px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: appear .65s ease;
+    }
 
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: .22em;
-  font: 600 .72rem Arial;
-  color: var(--rose);
-}
+    .screen.active {
+      display: flex;
+    }
 
-h1 {
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
-  font-weight: normal;
-  line-height: 1.05;
-  color: var(--rose);
-  margin: 18px 0;
-}
+    .content {
+      width: 100%;
+      max-width: 950px;
+      margin: auto;
+    }
 
-h1 em {
-  color: var(--gold);
-}
+    h1 {
+      margin: 20px 0;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.08;
+      font-weight: normal;
+      color: var(--rose);
+    }
 
-p {
-  line-height: 1.8;
-}
+    h1 em {
+      color: var(--gold);
+    }
 
-.hero p {
-  max-width: 620px;
-  margin: 0 auto 25px;
-}
+    h2 {
+      color: var(--rose);
+      font-weight: normal;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      margin: 18px 0;
+    }
 
-.btn {
-  display: inline-block;
-  border: 0;
-  border-radius: 30px;
-  padding: 14px 24px;
-  background: linear-gradient(120deg, #b66e88, #d0a16c);
-  color: white;
-  text-decoration: none;
-  font: 600 .9rem Arial;
-  cursor: pointer;
-  box-shadow: 0 8px 24px #a65e7928;
-}
+    h3 {
+      color: var(--rose);
+      font-weight: normal;
+      font-size: clamp(1.35rem, 4vw, 1.8rem);
+    }
 
-.section {
-  padding: 70px 20px;
-  scroll-margin-top: 70px;
-}
+    p {
+      line-height: 1.85;
+    }
 
-.inner {
-  max-width: 950px;
-  margin: auto;
-}
+    .description {
+      max-width: 650px;
+      margin: 0 auto 28px;
+    }
 
-.heading {
-  text-align: center;
-  margin: 0 auto 32px;
-  max-width: 700px;
-}
+    .btn {
+      display: inline-block;
+      border: 0;
+      border-radius: 35px;
+      padding: 15px 25px;
+      background: linear-gradient(120deg, #b66e88, #d0a16c);
+      color: white;
+      text-decoration: none;
+      font: 600 .92rem Arial, sans-serif;
+      cursor: pointer;
+      box-shadow: 0 8px 25px #a65e7928;
+      transition: transform .2s, box-shadow .2s;
+    }
 
-.heading h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: normal;
-  color: var(--rose);
-  margin: 12px 0;
-}
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px #a65e7935;
+    }
 
-.count-section {
-  background: #fff9fbd9;
-  border-block: 1px solid #efd8e2;
-}
+    .card {
+      width: 100%;
+      max-width: 780px;
+      margin: 28px auto 0;
+      padding: clamp(24px, 5vw, 45px);
+      background: #fffdfde8;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: 0 20px 55px #a65e7918;
+    }
 
-.card {
-  max-width: 780px;
-  margin: auto;
-  padding: clamp(24px, 5vw, 45px);
-  text-align: center;
-  background: #fffdfbcc;
-  border: 1px solid #e8c6d3;
-  border-radius: 28px;
-  box-shadow: 0 20px 55px #a65e7918;
-}
+    /* STEP 2: SECRET QUESTION */
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin: 25px 0;
-}
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+      text-align: left;
+    }
 
-.time {
-  padding: 18px 5px;
-  background: linear-gradient(#fff, #ffedf4);
-  border: 1px solid #efd4df;
-  border-radius: 16px;
-}
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: white;
+      font: 1rem Arial, sans-serif;
+      cursor: pointer;
+    }
 
-.time strong {
-  display: block;
-  font-size: clamp(1.7rem, 5vw, 3rem);
-  font-weight: normal;
-  color: var(--rose);
-  font-variant-numeric: tabular-nums;
-}
+    .option:has(input:checked) {
+      background: #ffedf4;
+      border-color: var(--rose);
+    }
 
-.time span {
-  font: 600 .65rem Arial;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
+    input[type="radio"] {
+      accent-color: var(--rose);
+    }
 
-.note {
-  font: .85rem Arial;
-  color: #9c7d8b;
-}
+    .feedback {
+      min-height: 24px;
+      color: var(--rose);
+    }
 
-.hidden {
-  display: none !important;
-}
+    /* STEP 3: COUNTDOWN */
 
-.reveal {
-  animation: fade .8s ease;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0;
+    }
 
-@keyframes fade {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: none; }
-}
+    .time {
+      padding: 20px 5px;
+      background: linear-gradient(#fff, #ffedf4);
+      border: 1px solid #efd4df;
+      border-radius: 16px;
+    }
 
-/* CSS birthday cake */
-.cake {
-  height: 245px;
-  width: min(320px, 85vw);
-  margin: 12px auto 20px;
-  position: relative;
-}
+    .time strong {
+      display: block;
+      font-size: clamp(1.7rem, 5vw, 3rem);
+      font-weight: normal;
+      color: var(--rose);
+      font-variant-numeric: tabular-nums;
+    }
 
-.plate {
-  position: absolute;
-  bottom: 12px;
-  left: 8%;
-  width: 84%;
-  height: 42px;
-  border-radius: 50%;
-  background: #e6afc2;
-  box-shadow: 0 8px 0 #c9829e;
-}
+    .time span {
+      font: 600 .65rem Arial, sans-serif;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
 
-.tier {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 12px 12px 18px 18px;
-  background: linear-gradient(
-    90deg, #e9a8bf, #fff0f5 48%, #e9a8bf
-  );
-  box-shadow: inset 0 -7px #d88eaa;
-}
+    .note {
+      color: #9c7d8b;
+      font: .9rem Arial, sans-serif;
+    }
 
-.tier:before {
-  content: "";
-  position: absolute;
-  top: -7px;
-  left: 0;
-  right: 0;
-  height: 18px;
-  border-radius: 50%;
-  background: #fff0f5;
-  border-bottom: 3px solid #dca1b5;
-}
+    /* STEP 4: BIRTHDAY LETTER */
 
-.t1 {
-  bottom: 38px;
-  width: 78%;
-  height: 68px;
-}
+    .letter {
+      max-width: 720px;
+      margin: 28px auto;
+      padding: clamp(25px, 5vw, 40px);
+      text-align: left;
+      background: #fffdfde8;
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      box-shadow: 0 15px 45px #a65e7915;
+      font-size: 1.08rem;
+      line-height: 1.85;
+    }
 
-.t2 {
-  bottom: 99px;
-  width: 57%;
-  height: 58px;
-}
+    .signature {
+      color: var(--rose);
+      font-style: italic;
+    }
 
-.t3 {
-  bottom: 151px;
-  width: 36%;
-  height: 47px;
-}
+    /* STEP 5: CAKE AND CELEBRATION */
 
-.candle {
-  position: absolute;
-  bottom: 194px;
-  left: calc(50% - 5px);
-  height: 34px;
-  width: 10px;
-  background: repeating-linear-gradient(
-    45deg, #fff 0 5px, #d9a4b8 5px 9px
-  );
-  border-radius: 4px;
-  cursor: pointer;
-}
+    .final-card {
+      padding: clamp(25px, 5vw, 45px);
+      background: linear-gradient(140deg, #fff8fb, #f0e7ff);
+      border: 1px solid #ead3e1;
+      border-radius: 28px;
+    }
 
-.flame {
-  position: absolute;
-  top: -19px;
-  left: -3px;
-  width: 16px;
-  height: 21px;
-  border-radius: 50%;
-  background: #ffc65c;
-  box-shadow: 0 0 20px #ffc65c;
-  animation: flicker .8s infinite alternate;
-}
+    .cake {
+      position: relative;
+      width: min(320px, 85vw);
+      height: 260px;
+      margin: 35px auto 15px;
+    }
 
-.flame.out {
-  display: none;
-}
+    .plate {
+      position: absolute;
+      bottom: 12px;
+      left: 8%;
+      width: 84%;
+      height: 38px;
+      border-radius: 50%;
+      background: #e6afc2;
+      box-shadow: 0 8px 0 #c9829e;
+    }
 
-@keyframes flicker {
-  to { transform: scale(1.12) rotate(8deg); }
-}
+    .tier {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 12px 12px 18px 18px;
+      background: linear-gradient(90deg, #e9a8bf, #fff0f5 48%, #e9a8bf);
+      box-shadow: inset 0 -7px #d88eaa;
+    }
 
-/* Question and letter cards */
-.question, .letter {
-  max-width: 720px;
-  margin: auto;
-  padding: clamp(24px, 5vw, 40px);
-  border: 1px solid #e8c6d3;
-  border-radius: 24px;
-  background: #fffdfbd9;
-  box-shadow: 0 15px 45px #a65e7915;
-}
+    .tier::before {
+      content: "";
+      position: absolute;
+      top: -7px;
+      left: 0;
+      right: 0;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff0f5;
+      border-bottom: 3px solid #dca1b5;
+    }
 
-.question h3, .letter h3 {
-  font-weight: normal;
-  font-size: 1.7rem;
-  color: var(--rose);
-  margin-top: 0;
-}
+    .tier-one {
+      bottom: 38px;
+      width: 78%;
+      height: 68px;
+    }
 
-.options {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin: 22px 0;
-}
+    .tier-two {
+      bottom: 99px;
+      width: 57%;
+      height: 58px;
+    }
 
-.option {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 14px;
-  background: white;
-  border: 1px solid #e9cbd7;
-  border-radius: 13px;
-  font: 1rem Arial;
-  cursor: pointer;
-}
+    .tier-three {
+      bottom: 151px;
+      width: 36%;
+      height: 47px;
+    }
 
-.option:has(input:checked) {
-  background: #ffedf4;
-  border-color: #c58a9f;
-}
+    .candle {
+      position: absolute;
+      bottom: 194px;
+      left: calc(50% - 5px);
+      width: 10px;
+      height: 35px;
+      border-radius: 4px;
+      background: repeating-linear-gradient(
+        45deg, #fff 0 5px, #d9a4b8 5px 9px
+      );
+      cursor: pointer;
+    }
 
-input {
-  accent-color: #b76e79;
-}
+    .flame {
+      position: absolute;
+      top: -20px;
+      left: -3px;
+      width: 16px;
+      height: 21px;
+      border-radius: 50%;
+      background: #ffc65c;
+      box-shadow: 0 0 20px #ffc65c;
+      animation: flicker .8s infinite alternate;
+    }
 
-.feedback {
-  color: var(--rose);
-  min-height: 22px;
-}
+    .flame.out {
+      display: none;
+    }
 
-.letter {
-  font-size: 1.08rem;
-  line-height: 1.85;
-}
+    .cake-hint {
+      color: var(--rose);
+      font-size: .95rem;
+    }
 
-.signature {
-  color: var(--rose);
-  font-style: italic;
-}
+    .special-wish {
+      padding: 15px;
+      color: var(--rose);
+      font-size: 1.1rem;
+    }
 
-/* Final celebration */
-.final {
-  text-align: center;
-  padding: 42px 22px;
-  background: linear-gradient(140deg, #fff8fb, #f0e7ff);
-  border: 1px solid #ead3e1;
-  border-radius: 28px;
-}
+    footer {
+      padding: 25px;
+      text-align: center;
+      color: #9c8490;
+      font: .8rem Arial, sans-serif;
+    }
 
-.final h2 {
-  font-weight: normal;
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  color: var(--rose);
-}
+    .float {
+      position: fixed;
+      bottom: -30px;
+      z-index: 20;
+      pointer-events: none;
+      animation: float-up 4s linear forwards;
+    }
 
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #9c8490;
-  font: .8rem Arial;
-}
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-.float {
-  position: fixed;
-  bottom: -30px;
-  z-index: 9;
-  pointer-events: none;
-  animation: up 4s linear forwards;
-}
+    @keyframes flicker {
+      to { transform: scale(1.12) rotate(8deg); }
+    }
 
-@keyframes up {
-  to {
-    transform: translateY(-110vh) rotate(25deg);
-    opacity: 0;
-  }
-}
+    @keyframes float-up {
+      to {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+      }
+    }
 
-@media (max-width: 600px) {
-  nav a { margin: 0 10px 0 0; }
-  .grid { gap: 6px; }
-  .time { padding: 15px 2px; }
-  .time span { font-size: .55rem; }
-  .options { grid-template-columns: 1fr; }
-}
-</style>
+    @media (max-width: 600px) {
+      nav {
+        justify-content: center;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        gap: 6px;
+      }
+
+      .time {
+        padding: 15px 2px;
+      }
+
+      .time span {
+        font-size: .52rem;
+      }
+
+      .screen {
+        padding: 45px 16px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<nav>
-  <div class="brand">♡ PRINCESS KHOLA</div>
-  <div>
-    <a href="#home">Home</a>
-    <a href="#countdown">Countdown</a>
-    <a href="#question">Surprise</a>
-    <a href="#letter">Letter</a>
-  </div>
-</nav>
+  <nav>
+    <div class="brand">♡ PRINCESS KHOLA</div>
+    <div class="step-label" id="progress">Step 1 of 5</div>
+  </nav>
 
-<header class="hero" id="home">
-  <div>
-    <div class="eyebrow">A little place made with love</div>
-    <h1>For our very own<br><em>Princess Khola</em> ♡</h1>
-    <p>
-      A soft, dreamy corner of the internet, created just for you.
-      Something special is waiting here — and its moment is almost here.
-    </p>
-    <a class="btn" href="#countdown">Discover Your Surprise ✨</a>
-  </div>
-</header>
+  <main>
 
-<!-- COUNTDOWN SECTION -->
-<section class="section count-section" id="countdown">
-  <div class="inner">
-    <div class="heading">
-      <div class="eyebrow">The special moment</div>
-      <h2>Counting Down to Your Day</h2>
-      <p>
-        Every second brings us closer to celebrating you.
-        When the clock reaches zero, your birthday surprise will appear right here.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="eyebrow">The countdown to</div>
-      <h2 style="font-weight:normal;color:var(--rose)">
-        1 November 2026 · 12:00 AM
-      </h2>
-
-      <div class="grid">
-        <div class="time"><strong id="days">--</strong><span>Days</span></div>
-        <div class="time"><strong id="hours">--</strong><span>Hours</span></div>
-        <div class="time"><strong id="minutes">--</strong><span>Minutes</span></div>
-        <div class="time"><strong id="seconds">--</strong><span>Seconds</span></div>
+    <!-- STEP 1: WELCOME SCREEN -->
+    <section class="screen active" id="step1">
+      <div class="content">
+        <div class="step-label">A little place made with love</div>
+        <h1>
+          For our very own<br>
+          <em>Princess Khola</em> ♡
+        </h1>
+        <p class="description">
+          A soft, dreamy corner of the internet, created just for you.
+          Something special is waiting here — and its moment is almost here.
+        </p>
+        <button class="btn" onclick="goToStep(2)">
+          Discover Your Surprise ✨
+        </button>
       </div>
+    </section>
 
-      <p class="note" id="countMessage">
-        Made with love, especially for Princess Khola ♡
-      </p>
+    <!-- STEP 2: SECRET QUESTION -->
+    <section class="screen" id="step2">
+      <div class="content">
+        <div class="step-label">A tiny secret</div>
+        <h2>Before You Continue...</h2>
+        <p>Answer this little question to unlock the next part of your birthday journey.</p>
 
-      <button class="btn hidden" id="openSurprise" onclick="showReveal()">
-        Open Your Birthday Surprise ♡
-      </button>
+        <div class="card">
+          <h3>Who is your favourite among your brothers? ♡</h3>
+          <p>Choose one to continue.</p>
 
-      <!-- Birthday reveal appears when countdown finishes -->
-      <div class="reveal hidden" id="birthdayReveal">
-        <div class="eyebrow">The wait is over</div>
-        <h2 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:normal;color:var(--rose)">
-          Happy Birthday,<br>Princess Khola!
-        </h2>
+          <form id="brotherForm">
+            <div class="options">
+              <label class="option">
+                <input type="radio" name="brother" value="Hamza" required>
+                Hamza
+              </label>
 
-        <div class="cake" aria-label="Pink birthday cake">
-          <div class="plate"></div>
-          <div class="tier t1"></div>
-          <div class="tier t2"></div>
-          <div class="tier t3"></div>
-          <div class="candle" title="Tap the candle to blow it out"
-               onclick="document.querySelector('.flame').classList.toggle('out')">
-            <div class="flame"></div>
-          </div>
+              <label class="option">
+                <input type="radio" name="brother" value="Shoaib">
+                Shoaib
+              </label>
+
+              <label class="option">
+                <input type="radio" name="brother" value="Huzaifa">
+                Huzaifa
+              </label>
+
+              <label class="option">
+                <input type="radio" name="brother" value="Hassaan">
+                Hassaan
+              </label>
+
+              <label class="option">
+                <input type="radio" name="brother" value="Ali">
+                Ali
+              </label>
+            </div>
+
+            <p class="feedback" id="feedback" aria-live="polite"></p>
+
+            <button class="btn" type="submit">
+              Unlock the Next Part ♡
+            </button>
+          </form>
         </div>
+      </div>
+    </section>
 
-        <p>
-          May Allah fill your life with happiness, protect you always,
-          grant you good health, and bless you with success, peace,
-          and countless beautiful moments. Ameen. ♡
+    <!-- STEP 3: COUNTDOWN -->
+    <section class="screen" id="step3">
+      <div class="content">
+        <div class="step-label">The special moment</div>
+        <h2>Counting Down to Your Day</h2>
+
+        <p class="description">
+          Every second brings us closer to celebrating you.
+          When the clock reaches zero, your next birthday surprise will unlock.
         </p>
 
-        <a class="btn" href="#question">Continue to Your Surprise ↓</a>
+        <div class="card">
+          <div class="step-label">The countdown to</div>
+          <h3>1 November 2026 · 12:00 AM</h3>
+
+          <div class="grid">
+            <div class="time">
+              <strong id="days">--</strong>
+              <span>Days</span>
+            </div>
+
+            <div class="time">
+              <strong id="hours">--</strong>
+              <span>Hours</span>
+            </div>
+
+            <div class="time">
+              <strong id="minutes">--</strong>
+              <span>Minutes</span>
+            </div>
+
+            <div class="time">
+              <strong id="seconds">--</strong>
+              <span>Seconds</span>
+            </div>
+          </div>
+
+          <p class="note" id="countMessage">
+            Made with love, especially for Princess Khola ♡
+          </p>
+
+          <button
+            class="btn"
+            id="continueAfterCountdown"
+            hidden
+            onclick="goToStep(4)"
+          >
+            Open Your Birthday Letter ♡
+          </button>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- SECRET QUESTION -->
-<section class="section" id="question">
-  <div class="inner">
-    <div class="heading">
-      <div class="eyebrow">A tiny secret</div>
-      <h2>Before You Continue…</h2>
-      <p>Answer this little question to unlock the next part of your birthday journey.</p>
-    </div>
+    <!-- STEP 4: BIRTHDAY LETTER / FOURTH SCREENSHOT -->
+    <section class="screen" id="step4">
+      <div class="content">
+        <div class="step-label">A message from the heart</div>
+        <h2>A Little Birthday Letter</h2>
 
-    <div class="question">
-      <h3>Who is your favourite among your brothers? ♡</h3>
-      <p>Choose one to continue.</p>
+        <div class="letter">
+          <h3>Dear Princess Khola,</h3>
 
-      <form id="brotherForm">
-        <div class="options">
-          <label class="option"><input type="radio" name="brother" value="Hamza" required> Hamza</label>
-          <label class="option"><input type="radio" name="brother" value="Shoaib"> Shoaib</label>
-          <label class="option"><input type="radio" name="brother" value="Huzaifa"> Huzaifa</label>
-          <label class="option"><input type="radio" name="brother" value="Hassaan"> Hassaan</label>
-          <label class="option"><input type="radio" name="brother" value="Ali"> Ali</label>
+          <p>
+            Today is a reminder of how special you are and how much happiness
+            you bring to the people around you. I hope the year ahead brings
+            you closer to your dreams, fills your days with laughter, and
+            gives you beautiful memories to treasure.
+          </p>
+
+          <p>
+            May you always have reasons to smile, strength when life feels
+            difficult, and people beside you who remind you how loved you are.
+            Keep being your lovely self, and never forget that you deserve
+            kindness, joy, and all the good things life has to offer.
+          </p>
+
+          <p>
+            May Allah guide every step you take, make your future bright,
+            and keep you safe and content always. Ameen. ♡
+          </p>
+
+          <p class="signature">With lots of love, always ♡</p>
         </div>
 
-        <p class="feedback" id="feedback" aria-live="polite"></p>
-        <button class="btn" type="submit">Unlock the Next Part ♡</button>
-      </form>
-    </div>
-  </div>
-</section>
+        <button class="btn" onclick="goToStep(5)">
+          Next Surprise ✨
+        </button>
+      </div>
+    </section>
 
-<!-- BIRTHDAY LETTER -->
-<section class="section" id="letter">
-  <div class="inner">
-    <div class="heading">
-      <div class="eyebrow">A message from the heart</div>
-      <h2>A Little Birthday Letter</h2>
-    </div>
+    <!-- STEP 5: FINAL SURPRISE / CAKE -->
+    <section class="screen" id="step5">
+      <div class="content">
+        <div class="final-card">
+          <div class="step-label">Your final surprise</div>
+          <h2>Happy Birthday, Princess Khola! 🎂</h2>
 
-    <div class="letter">
-      <h3>Dear Princess Khola,</h3>
-      <p>
-        Today is a reminder of how special you are and how much happiness
-        you bring to the people around you. I hope the year ahead brings
-        you closer to your dreams, fills your days with laughter, and
-        gives you beautiful memories to treasure.
-      </p>
-      <p>
-        May you always have reasons to smile, strength when life feels
-        difficult, and people beside you who remind you how loved you are.
-        Keep being your lovely self, and never forget that you deserve
-        kindness, joy, and all the good things life has to offer.
-      </p>
-      <p>
-        May Allah guide every step you take, make your future bright,
-        and keep you safe and content always. Ameen.
-      </p>
-      <p class="signature">With lots of love, always ♡</p>
-    </div>
-  </div>
-</section>
+          <p>
+            Today is all about you — your beautiful smile, your happiness,
+            and all the wonderful things waiting for you.
+          </p>
 
-<!-- FINAL CELEBRATION -->
-<section class="section" id="celebration">
-  <div class="inner final">
-    <div class="eyebrow">One more wish</div>
-    <h2>Keep Shining, Princess ✨</h2>
-    <p>
-      May your world always be filled with love, gentle moments,
-      beautiful surprises, and dreams that come true.
-      This little website is a reminder that you are celebrated today and always.
-    </p>
-    <button class="btn" onclick="celebrate()">Send Some Birthday Sparkles ✨</button>
-    <p class="note" id="celebrateMessage"></p>
-  </div>
-</section>
+          <div class="cake" aria-label="Pink birthday cake">
+            <div class="plate"></div>
+            <div class="tier tier-one"></div>
+            <div class="tier tier-two"></div>
+            <div class="tier tier-three"></div>
 
-<footer>Made with ♡ for Princess Khola · Rose Gold & Pink Edition</footer>
+            <div
+              class="candle"
+              id="candle"
+              role="button"
+              tabindex="0"
+              aria-label="Blow out the birthday candle"
+              title="Click the candle to blow it out"
+            >
+              <div class="flame" id="flame"></div>
+            </div>
+          </div>
 
-<script>
-const birthdayDate = new Date("2026-11-01T00:00:00+05:00").getTime();
-let revealed = false;
+          <p class="cake-hint" id="cakeHint">
+            Make a wish, Princess, and tap the candle! 🕯️
+          </p>
 
-function showReveal() {
-  document.getElementById("birthdayReveal").classList.remove("hidden");
-  document.getElementById("openSurprise").classList.add("hidden");
-  revealed = true;
-  hearts(10);
-}
+          <button class="btn" onclick="celebrate()">
+            Send Birthday Sparkles ✨
+          </button>
 
-function updateCountdown() {
-  const distance = birthdayDate - Date.now();
+          <p class="special-wish" id="specialWish" aria-live="polite">
+            May Allah bless you with happiness, good health, success,
+            peace, and endless reasons to smile. Ameen. ♡
+          </p>
 
-  if (distance <= 0) {
-    ["days", "hours", "minutes", "seconds"].forEach(id => {
-      document.getElementById(id).textContent = "0";
+          <p class="note">
+            You are loved more than words can say. Keep shining, Princess! ♡
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Made with ♡ for Princess Khola · Rose Gold & Pink Edition
+  </footer>
+
+  <script>
+    // STEP CONTROL: show only one screen at a time.
+    let currentStep = 1;
+
+    function goToStep(step) {
+      // The final two steps remain locked until the birthday arrives.
+      if (step >= 4 && !birthdayUnlocked) {
+        return;
+      }
+
+      document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+      });
+
+      document.getElementById("step" + step).classList.add("active");
+      document.getElementById("progress").textContent =
+        "Step " + step + " of 5";
+
+      currentStep = step;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      if (step === 5) {
+        hearts(12);
+      }
+    }
+
+    // STEP 2: The answer unlocks the countdown screen.
+    document.getElementById("brotherForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const selected = document.querySelector(
+        'input[name="brother"]:checked'
+      );
+
+      if (!selected) {
+        document.getElementById("feedback").textContent =
+          "Please choose an answer first. ♡";
+        return;
+      }
+
+      document.getElementById("feedback").textContent =
+        "A lovely choice! ♡ Your countdown is ready.";
+
+      setTimeout(() => goToStep(3), 500);
     });
 
-    document.getElementById("countMessage").textContent =
-      "It is your special day! Your surprise is ready, Princess. ♡";
+    // STEP 3: Birthday countdown.
+    // Pakistan Standard Time is UTC+05:00.
+    const birthdayDate = new Date(
+      "2026-11-01T00:00:00+05:00"
+    ).getTime();
 
-    document.getElementById("openSurprise").classList.remove("hidden");
+    let birthdayUnlocked = false;
 
-    if (!revealed) showReveal();
-    return;
-  }
+    function unlockBirthday() {
+      birthdayUnlocked = true;
 
-  document.getElementById("days").textContent =
-    Math.floor(distance / 86400000);
+      document.getElementById("countMessage").textContent =
+        "The wait is over! Your birthday surprises are ready, Princess. ♡";
 
-  document.getElementById("hours").textContent =
-    String(Math.floor(distance % 86400000 / 3600000)).padStart(2, "0");
+      document.getElementById("continueAfterCountdown").hidden = false;
+      document.getElementById("continueAfterCountdown").textContent =
+        "Open Your Birthday Letter ♡";
+    }
 
-  document.getElementById("minutes").textContent =
-    String(Math.floor(distance % 3600000 / 60000)).padStart(2, "0");
+    function updateCountdown() {
+      const distance = birthdayDate - Date.now();
 
-  document.getElementById("seconds").textContent =
-    String(Math.floor(distance % 60000 / 1000)).padStart(2, "0");
-}
+      if (distance <= 0) {
+        ["days", "hours", "minutes", "seconds"].forEach(id => {
+          document.getElementById(id).textContent = "00";
+        });
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+        if (!birthdayUnlocked) {
+          unlockBirthday();
+          hearts(25);
+        }
 
-document.getElementById("brotherForm").addEventListener("submit", event => {
-  event.preventDefault();
+        return;
+      }
 
-  const selected = document.querySelector('input[name="brother"]:checked');
-  if (!selected) return;
+      document.getElementById("days").textContent =
+        Math.floor(distance / 86400000);
 
-  document.getElementById("feedback").textContent =
-    "A lovely choice! ♡ Your next surprise is ready below.";
+      document.getElementById("hours").textContent =
+        String(Math.floor((distance % 86400000) / 3600000)).padStart(2, "0");
 
-  document.getElementById("celebration").scrollIntoView({ behavior: "smooth" });
-  hearts(12);
-});
+      document.getElementById("minutes").textContent =
+        String(Math.floor((distance % 3600000) / 60000)).padStart(2, "0");
 
-function hearts(amount = 25) {
-  const symbols = ["♡", "✦", "✿", "♥", "✨"];
+      document.getElementById("seconds").textContent =
+        String(Math.floor((distance % 60000) / 1000)).padStart(2, "0");
+    }
 
-  for (let i = 0; i < amount; i++) {
-    const element = document.createElement("span");
-    element.className = "float";
-    element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-    element.style.left = Math.random() * 100 + "vw";
-    element.style.fontSize = (16 + Math.random() * 22) + "px";
-    element.style.color = ["#c6819d", "#c69b65", "#bba3db"][
-      Math.floor(Math.random() * 3)
-    ];
-    element.style.animationDuration = (3 + Math.random() * 2) + "s";
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
-    document.body.appendChild(element);
-    setTimeout(() => element.remove(), 5200);
-  }
-}
+    // STEP 5: Blow out the candle.
+    function blowOutCandle() {
+      document.getElementById("flame").classList.add("out");
 
-function celebrate() {
-  hearts(35);
-  document.getElementById("celebrateMessage").textContent =
-    "A shower of love and sparkles for you, Princess Khola! ♡";
-}
-</script>
+      document.getElementById("cakeHint").textContent =
+        "Wish made! May all your beautiful dreams come true. ♡";
+
+      hearts(20);
+    }
+
+    document.getElementById("candle").addEventListener("click", blowOutCandle);
+
+    document.getElementById("candle").addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        blowOutCandle();
+      }
+    });
+
+    // Floating hearts, flowers and sparkles.
+    function hearts(amount = 25) {
+      const symbols = ["♡", "✦", "✿", "♥", "✨"];
+
+      for (let i = 0; i < amount; i++) {
+        const element = document.createElement("span");
+
+        element.className = "float";
+        element.textContent =
+          symbols[Math.floor(Math.random() * symbols.length)];
+
+        element.style.left = Math.random() * 100 + "vw";
+        element.style.fontSize = (16 + Math.random() * 22) + "px";
+
+        element.style.color = [
+          "#c6819d", "#c69b65", "#bba3db"
+        ][Math.floor(Math.random() * 3)];
+
+        element.style.animationDuration =
+          (3 + Math.random() * 2) + "s";
+
+        document.body.appendChild(element);
+
+        setTimeout(() => element.remove(), 5200);
+      }
+    }
+
+    function celebrate() {
+      hearts(45);
+
+      document.getElementById("specialWish").textContent =
+        "A shower of love and sparkles for you, Princess Khola! " +
+        "May your life always be filled with happiness, love and blessings. ♡";
+    }
+  </script>
 
 </body>
 </html>
